@@ -17,7 +17,6 @@ BuildRequires:  qt5-qtprintsupport-devel
 #BuildRequires:  qt5-qtlocation-devel
 BuildRequires:  qt5-qtmultimedia-devel
 BuildRequires:  qt5-qtscript-devel
-BuildRequires:  qt5-qtv8-devel
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  qt5-qt3d-devel
