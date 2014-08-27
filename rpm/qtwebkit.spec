@@ -31,8 +31,8 @@ BuildRequires:  pkgconfig(xext)
 BuildRequires:  pkgconfig(xrender)
 %endif
 BuildRequires:  glib2-devel
-BuildRequires:  gst-plugins-base-devel
-BuildRequires:  gstreamer-devel
+BuildRequires:  gstreamer1-devel
+BuildRequires:  gstreamer1-plugins-base-devel
 BuildRequires:  libjpeg-turbo-devel
 BuildRequires:  libpng-devel
 BuildRequires:  libxml2-devel
