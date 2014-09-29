@@ -1,14 +1,17 @@
+# Package prefix
+%define pkgname qt5-qtwebkit
+
 # Conditional building of X11 related things 
 %bcond_with X11
 
-Name:       qt5-qtwebkit
+Name:       qtwebkit
 Summary:    Web content engine library for Qt
-Version:    5.0.2
-Release:    1%{?dist}
+Version:    5.3.2
+Release:    1
 Group:      Qt/Qt
 License:    BSD and LGPLv2+
-URL:        http://download.qt-project.org/official_releases/qt/5.0/5.0.2/submodules/qtwebkit-opensource-src-5.0.2.tar.gz
-Source0:    %{name}-%{version}.tar.bz2
+URL:        http://qt.io
+Source0:    %{name}-%{version}.tar.xz
 BuildRequires:  qt5-qtcore-devel
 BuildRequires:  qt5-qtgui-devel
 BuildRequires:  qt5-qtnetwork-devel
@@ -52,12 +55,20 @@ BuildRequires:  perl-libs
 QtWebKit provides a Web browser engine that makes it easy to embed content from
 the World Wide Web into your Qt application.
 
+%package -n %{pkgname}
+Summary:    Web content engine library for Qt
+Group:      Qt/Qt
 
-%package uiprocess-launcher
+%description -n %{pkgname}
+QtWebKit provides a Web browser engine that makes it easy to embed content from
+the World Wide Web into your Qt application.
+
+
+%package -n %{pkgname}-uiprocess-launcher
 Summary:    Web content engine library for Qt - WebKit2 process launcher
 Group:      Qt/Qt
 
-%description uiprocess-launcher
+%description -n %{pkgname}-uiprocess-launcher
 QtWebKit provides a Web browser engine that makes it easy to embed content from
 the World Wide Web into your Qt application.
 
@@ -67,7 +78,7 @@ This package contains the UI process launcher for WebKit2 engine
 %package -n libqtwebkit5
 Summary:    Web content engine library for Qt - core runtime files
 Group:      Qt/Qt
-Requires:   %{name}-uiprocess-launcher = %{version}
+Requires:   %{pkgname}-uiprocess-launcher = %{version}
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
@@ -141,7 +152,7 @@ This package contains the WebKit QML Experimental plugin for QtQml.
 
 
 %prep
-%setup -q -n %{name}-%{version}/upstream
+%setup -q -n %{name}-%{version}
 
 # remove .../qt/tests directory which introduces nothing but trouble
 rm -rf Source/WebKit/qt/tests/
@@ -171,6 +182,7 @@ qmake -qt=5 CONFIG+=release CONFIG-=debug \
        CONFIG*=use_all_in_one_files
 make %{?jobs:-j%jobs}
 
+
 %install
 rm -rf %{buildroot}
 
@@ -180,15 +192,13 @@ rm -f %{buildroot}/usr/lib/libQt5WebKit.la
 rm -f %{buildroot}/usr/lib/libQt5WebKitWidgets.la
 # Fix wrong path in pkgconfig files
 find %{buildroot}%{_libdir}/pkgconfig -type f -name '*.pc' \
--exec perl -pi -e "s, -L%{_builddir}/?\S+,,g" {} \;
+  -exec perl -pi -e "s, -L%{_builddir}/?\S+,,g" {} \;
 # Fix wrong path in prl files
 find %{buildroot}%{_libdir} -type f -name '*.prl' \
--exec sed -i -e "/^QMAKE_PRL_BUILD_DIR/d;s/\(QMAKE_PRL_LIBS =\).*/\1/" {} \;
+  -exec sed -i -e "/^QMAKE_PRL_BUILD_DIR/d;s/\(QMAKE_PRL_LIBS =\).*/\1/" {} \;
 # Eliminate duplicates
 %fdupes %{buildroot}/%{_libdir}
 %fdupes %{buildroot}/%{_includedir}
-
-
 
 %post -n libqtwebkit5 -p /sbin/ldconfig
 
@@ -199,7 +209,7 @@ find %{buildroot}%{_libdir} -type f -name '*.prl' \
 %postun -n libqtwebkit5-widgets -p /sbin/ldconfig
 
 
-%files uiprocess-launcher
+%files -n %{pkgname}-uiprocess-launcher
 %defattr(-,root,root,-)
 %{_libdir}/qt5/libexec/QtWebProcess
 %if %{with X11}
@@ -244,6 +254,3 @@ find %{buildroot}%{_libdir} -type f -name '*.prl' \
 %defattr(-,root,root,-)
 %{_libdir}/qt5/qml/QtWebKit/experimental/libqmlwebkitexperimentalplugin.so
 %{_libdir}/qt5/qml/QtWebKit/experimental/qmldir
-
-
-#### No changelog section, separate $pkg.changes contains the history
