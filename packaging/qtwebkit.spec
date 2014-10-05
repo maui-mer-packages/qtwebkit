@@ -27,6 +27,7 @@ BuildRequires:  qt5-qt3d-devel
 BuildRequires:  qt5-qtxmlpatterns-devel
 BuildRequires:  qt5-qmake
 BuildRequires:  qt5-qtsql-devel
+BuildRequires:  qt5-qttest-devel
 BuildRequires:  pkgconfig(icu-uc)
 BuildRequires:  pkgconfig(sqlite3)
 %if %{with X11}
