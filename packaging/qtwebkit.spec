@@ -17,13 +17,13 @@ BuildRequires:  qt5-qtgui-devel
 BuildRequires:  qt5-qtnetwork-devel
 BuildRequires:  qt5-qtwidgets-devel
 BuildRequires:  qt5-qtprintsupport-devel
-#BuildRequires:  qt5-qtlocation-devel
+BuildRequires:  qt5-qtlocation-devel
 BuildRequires:  qt5-qtmultimedia-devel
 BuildRequires:  qt5-qtscript-devel
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  qt5-qt3d-devel
-#BuildRequires:  qt5-qtsensors-devel
+BuildRequires:  qt5-qtsensors-devel
 BuildRequires:  qt5-qtxmlpatterns-devel
 BuildRequires:  qt5-qmake
 BuildRequires:  qt5-qtsql-devel
