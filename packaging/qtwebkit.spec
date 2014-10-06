@@ -33,6 +33,7 @@ BuildRequires:  pkgconfig(sqlite3)
 %if %{with X11}
 BuildRequires:  pkgconfig(xext)
 BuildRequires:  pkgconfig(xrender)
+BuildRequires:  pkgconfig(xcomposite)
 %endif
 BuildRequires:  glib2-devel
 BuildRequires:  pkgconfig(gstreamer-0.10)
